@@ -1,0 +1,173 @@
+/* Glass Card Effect */
+.player-card {
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 8px 32px 0 rgba(0, 0, 0, 0.37),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+  transition: all 0.2s ease;
+}
+
+.player-card:hover {
+  transform: scale(1.02);
+  background: rgba(0, 0, 0, 0.35);
+  box-shadow:
+    0 12px 40px 0 rgba(0, 0, 0, 0.45),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+/* Liquid Glass Border - Album Art */
+.liquid-glass-border {
+  position: absolute;
+  inset: 0;
+  border-radius: 50px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.liquid-glass-border::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50px;
+  background: linear-gradient(
+    315deg,
+    rgb(255, 251, 246) 0%,
+    rgba(120, 120, 120, 0) 30%,
+    rgba(120, 120, 120, 0) 70%,
+    rgb(255, 251, 246) 100%
+  ) border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box,
+                linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  border: 1px solid transparent;
+  z-index: 2;
+}
+
+/* Play/Pause Button */
+.play-pause-button {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 251, 246, 0.2);
+  border-radius: 50px;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: absolute;
+  color: white;
+  font-size: 16px;
+}
+
+.play-pause-button:hover {
+  transform: scale(1.05);
+  background: rgba(0, 0, 0, 0.6);
+  border-color: rgba(255, 251, 246, 0.3);
+}
+
+.play-pause-button:active {
+  transform: scale(0.95);
+}
+
+.button-hidden {
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+}
+
+/* Visualizer Container */
+.visualizer-container {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30%;
+  height: 30px;
+  opacity: 0.6;
+  z-index: 5;
+}
+
+/* Animated Bars Fallback */
+.visualizer-bars {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  height: 100%;
+}
+
+.visualizer-bar {
+  width: 2px;
+  background: #1DB954;
+  border-radius: 1px;
+  animation: wave 0.8s ease-in-out infinite;
+}
+
+.visualizer-bar:nth-child(1) { animation-delay: 0s; height: 20%; }
+.visualizer-bar:nth-child(2) { animation-delay: 0.1s; height: 40%; }
+.visualizer-bar:nth-child(3) { animation-delay: 0.2s; height: 60%; }
+.visualizer-bar:nth-child(4) { animation-delay: 0.1s; height: 40%; }
+.visualizer-bar:nth-child(5) { animation-delay: 0s; height: 20%; }
+
+@keyframes wave {
+  0%, 100% {
+    height: 20%;
+  }
+  50% {
+    height: 100%;
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .player-card {
+    width: 100% !important;
+    max-width: 90vw;
+    min-width: auto;
+    height: 85px;
+    padding: 14px 12px !important;
+    gap: 10px !important;
+  }
+
+  .album-art-container {
+    width: 48px !important;
+    height: 48px !important;
+    min-width: 48px !important;
+  }
+
+  .album-image {
+    width: 32px !important;
+    height: 32px !important;
+    margin: 8px !important;
+  }
+
+  .track-info {
+    min-width: 100px !important;
+  }
+
+  .track-title {
+    font-size: 12px !important;
+  }
+
+  .track-metadata {
+    font-size: 10px !important;
+  }
+
+  .play-pause-button {
+    width: 32px !important;
+    height: 32px !important;
+    font-size: 12px !important;
+  }
+
+  .visualizer-container {
+    width: 40% !important;
+  }
+}

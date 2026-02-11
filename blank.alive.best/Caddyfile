@@ -1,0 +1,13 @@
+# Auto-generated Caddyfile for blank.alive.best
+# Port: __PORT__
+
+blank.alive.best {
+    import common_headers
+    import image_serving
+    reverse_proxy localhost:__PORT__ {
+        header_up Host {host}
+        header_up X-Real-IP {remote_host}
+        header_up X-Forwarded-For {remote_host}
+        header_up X-Forwarded-Proto {scheme}
+    }
+}

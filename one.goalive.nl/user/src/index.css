@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@font-face {
+  font-family: "Helvetica Now";
+  src: url("/fonts/HelveticaNowVar.ttf") format("truetype");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    /* Minimal portfolio color system */
+    --background: 43 9% 96%; /* soft off-white #f6f6f4 */
+    --foreground: 0 0% 0%; /* black */
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 0%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 0%;
+
+    --primary: 0 0% 0%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 0 0% 94%;
+    --secondary-foreground: 0 0% 0%;
+
+    --muted: 0 0% 90%;
+    --muted-foreground: 0 0% 35%;
+
+    --accent: 0 0% 10%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 88%;
+    --input: 0 0% 88%;
+    --ring: 0 0% 0%;
+
+    --radius: 0rem;
+
+    /* Minimal shadows */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Helvetica Neue', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  input, textarea, select, button {
+    font-family: 'Helvetica Neue', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+  }
+}

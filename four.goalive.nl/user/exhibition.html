@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exhibition - Barend Bootsma</title>
+    <meta name="description" content="Exhibition project by Barend Bootsma" />
+    <meta name="author" content="Barend Bootsma" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='none'/><circle cx='50' cy='50' r='20' fill='%2300ff00'/></svg>" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        cursor: none;
+      }
+
+      body::before {
+        content: '';
+        position: fixed;
+        width: 4.2px;
+        height: 4.2px;
+        background: #000000;
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9999;
+        transform: translate(-50%, -50%);
+        top: var(--mouse-y, 0);
+        left: var(--mouse-x, 0);
+        transition: width 0.2s ease, height 0.2s ease;
+      }
+
+      body::after {
+        content: '';
+        position: fixed;
+        width: 4.2px;
+        height: 4.2px;
+        background: #000000;
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9998;
+        transform: translate(-50%, -50%);
+        top: var(--mouse-y, 0);
+        left: var(--mouse-x, 0);
+        transition: width 0.2s ease, height 0.2s ease;
+      }
+
+      body.hovering::before {
+        width: 8.4px;
+        height: 8.4px;
+      }
+
+      body.hovering::after {
+        width: 8.4px;
+        height: 8.4px;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+        background: #ffffff;
+        min-height: 100vh;
+      }
+
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        padding: 12px 24px;
+        background: #ffffff;
+        z-index: 100;
+      }
+
+      .logo {
+        font-size: 11px;
+        font-weight: 300;
+        color: #1a1a2e;
+        text-decoration: none;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 32px;
+        align-items: baseline;
+      }
+
+      .nav-link {
+        font-size: 11px;
+        font-weight: 300;
+        color: #1a1a2e;
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+
+      .nav-link:hover {
+        color: #1a1a2e;
+      }
+
+      .dropdown {
+        position: relative;
+        display: inline-block;
+      }
+
+      .dropdown-toggle {
+        font-size: 11px;
+        font-weight: 300;
+        color: #1a1a2e;
+        text-decoration: none;
+        background: none;
+        border: none;
+        cursor: none;
+        padding: 0;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+      }
+
+      .dropdown-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: #ffffff;
+        box-shadow: 0 1px 8px rgba(0, 0, 0, 0.08);
+        padding: 4px 0;
+        margin-top: 0px;
+        min-width: 100px;
+        z-index: 1000;
+      }
+
+      .dropdown:hover .dropdown-menu,
+      .dropdown-menu:hover,
+      .dropdown.active .dropdown-menu {
+        display: block;
+      }
+
+      .dropdown-menu a {
+        display: block;
+        padding: 6px 12px;
+        font-size: 11px;
+        font-weight: 300;
+        color: #1a1a2e;
+        text-decoration: none;
+        white-space: nowrap;
+      }
+
+      .dropdown-menu a:hover {
+        opacity: 0.6;
+      }
+
+      .dropdown-menu .disabled {
+        display: block;
+        padding: 6px 12px;
+        font-size: 11px;
+        font-weight: 300;
+        color: #cccccc;
+        text-decoration: none;
+        white-space: nowrap;
+        cursor: none;
+        pointer-events: none;
+      }
+
+      .exhibition-container {
+        display: flex;
+        min-height: 100vh;
+        padding-top: 48px;
+      }
+
+      .text-content {
+        position: fixed;
+        bottom: 24px;
+        left: 24px;
+        width: 260px;
+        z-index: 50;
+      }
+
+      .text-content h1 {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+        font-size: 11px;
+        font-weight: 300;
+        color: #1a1a2e;
+        margin-bottom: 22px;
+        opacity: 0.85;
+        letter-spacing: 0.1px;
+      }
+
+      .text-content p {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+        font-size: 11px;
+        font-weight: 300;
+        color: #1a1a2e;
+        line-height: 1.45;
+        margin-bottom: 6px;
+        opacity: 0.85;
+        letter-spacing: 0.1px;
+      }
+
+      .text-content ul {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+        font-size: 11px;
+        font-weight: 300;
+        color: #1a1a2e;
+        line-height: 1.45;
+        list-style: disc;
+        padding-left: 14px;
+        opacity: 0.85;
+        letter-spacing: 0.1px;
+        margin-top: 6px;
+      }
+
+      .text-content ul li {
+        margin-bottom: 0px;
+      }
+
+      .image-content {
+        margin-left: auto;
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+      }
+
+      .side-text {
+        margin-left: 50%;
+        margin-right: 24px;
+        margin-top: 6px;
+        margin-bottom: 12px;
+        width: calc(50% - 24px);
+        padding: 0;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+        font-size: 11px;
+        font-weight: 300;
+        color: #1a1a2e;
+        line-height: 1.5;
+        opacity: 0.85;
+        letter-spacing: 0.1px;
+        text-align: left;
+      }
+
+      .image-content img {
+        width: 100%;
+        height: auto;
+        display: block;
+        margin-bottom: 6px;
+      }
+
+      .image-content img:last-child {
+        margin-bottom: 0;
+      }
+
+      .image-content img {
+        cursor: none;
+      }
+
+      .image-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 6px;
+        margin-bottom: 6px;
+      }
+
+      .image-grid img {
+        width: 100%;
+        height: auto;
+        display: block;
+        margin-bottom: 0;
+      }
+
+      .fullscreen-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 10000;
+        justify-content: center;
+        align-items: center;
+        cursor: none;
+      }
+
+      .fullscreen-overlay.active {
+        display: flex;
+      }
+
+      .fullscreen-overlay img {
+        max-width: 90vw;
+        max-height: 90vh;
+        width: auto;
+        height: auto;
+        object-fit: contain;
+      }
+
+      .coming-soon {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+        font-size: 11px;
+        font-weight: 300;
+        color: #1a1a2e;
+        display: flex;
+        gap: 0;
+        position: fixed;
+        bottom: 32px;
+        left: 50vw;
+        transform: translateX(-50%);
+        background: #ffffff;
+        padding: 12px 24px;
+        border-radius: 24px;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+        z-index: 200;
+      }
+
+      .coming-soon .space {
+        width: 0.25em;
+      }
+
+      .coming-soon span {
+        display: inline-block;
+        animation: jump 5.6s ease-in-out infinite;
+      }
+
+      .coming-soon span:nth-child(1) { animation-delay: 0s; }
+      .coming-soon span:nth-child(2) { animation-delay: 0.2s; }
+      .coming-soon span:nth-child(3) { animation-delay: 0.4s; }
+      .coming-soon span:nth-child(4) { animation-delay: 0.6s; }
+      .coming-soon span:nth-child(5) { animation-delay: 0.8s; }
+      .coming-soon span:nth-child(6) { animation-delay: 1s; }
+      .coming-soon span:nth-child(7) { animation-delay: 1.2s; }
+      .coming-soon span:nth-child(8) { animation-delay: 1.4s; }
+      .coming-soon span:nth-child(9) { animation-delay: 1.6s; }
+      .coming-soon span:nth-child(10) { animation-delay: 1.8s; }
+      .coming-soon span:nth-child(11) { animation-delay: 2s; }
+      .coming-soon span:nth-child(12) { animation-delay: 2.2s; }
+      .coming-soon span:nth-child(13) { animation-delay: 2.4s; }
+      .coming-soon span:nth-child(14) { animation-delay: 2.6s; }
+      .coming-soon span:nth-child(15) { animation-delay: 2.8s; }
+      .coming-soon span:nth-child(16) { animation-delay: 3s; }
+      .coming-soon span:nth-child(17) { animation-delay: 3.2s; }
+      .coming-soon span:nth-child(18) { animation-delay: 3.4s; }
+      .coming-soon span:nth-child(19) { animation-delay: 3.6s; }
+      .coming-soon span:nth-child(20) { animation-delay: 3.8s; }
+      .coming-soon span:nth-child(21) { animation-delay: 4s; }
+      .coming-soon span:nth-child(22) { animation-delay: 4.2s; }
+      .coming-soon span:nth-child(23) { animation-delay: 4.4s; }
+
+      @keyframes jump {
+        0%, 3.57%, 100% {
+          transform: translateY(0);
+        }
+        1.79% {
+          transform: translateY(-10px);
+        }
+      }
+
+      @media (max-width: 768px) {
+        * {
+          cursor: auto !important;
+        }
+
+        body::before {
+          display: none;
+        }
+
+        body::after {
+          display: none;
+        }
+
+        nav {
+          padding: 20px 24px;
+        }
+
+        .coming-soon {
+          position: fixed;
+          bottom: 32px;
+          left: 50vw;
+          transform: translateX(-50%);
+        }
+
+        .exhibition-container {
+          flex-direction: column;
+        }
+
+        .text-content {
+          position: relative;
+          width: calc(100% - 48px);
+          bottom: auto;
+          left: auto;
+          margin: 80px 24px 24px 24px;
+        }
+
+        .image-content {
+          width: 100%;
+          margin-left: 0;
+        }
+
+        .side-text {
+          margin-left: 24px;
+          margin-right: 24px;
+          width: calc(100% - 48px);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <nav>
+      <a href="/" class="logo">Barend Bootsma</a>
+      <div class="nav-links">
+        <div class="dropdown">
+          <span class="dropdown-toggle">Projects</span>
+          <div class="dropdown-menu">
+            <a href="/exhibition.html">Exhibition</a>
+            <span class="disabled">Mush Room</span>
+            <span class="disabled">Alive</span>
+          </div>
+        </div>
+        <a href="mailto:barendbootsma@gmail.com" class="nav-link">Contact</a>
+      </div>
+    </nav>
+
+    <div class="coming-soon">
+      <span>S</span><span>i</span><span>t</span><span>e</span><span class="space"> </span><span>U</span><span>n</span><span>d</span><span>e</span><span>r</span><span class="space"> </span><span>C</span><span>o</span><span>n</span><span>s</span><span>t</span><span>r</span><span>u</span><span>c</span><span>t</span><span>i</span><span>o</span><span>n</span>
+    </div>
+
+    <div class="fullscreen-overlay" id="fullscreenOverlay">
+      <img src="" alt="">
+    </div>
+
+    <div class="exhibition-container">
+      <div class="text-content">
+        <h1>Reharvest</h1>
+        <p><br></p>
+        <p>I designed an exhibition for <em>Stichting Innovatie Glastuinbouw Nederland</em> (<em>SIGN</em>), from idea to concept and final production.</p>
+        <p>The exhibition shows the various material flows emerging from horticulture, and how different case studies reapply these materials as valuable resources across other industries.</p>
+        <p>One of the design challenges was to create a modular structure to fit various exhibition spaces and be appealing to diverse audiences.</p>
+        <p>Positioned as a beating heart, an abstracted glasshouse conveys its role as the life behind the materials. This object contains live greenhouse plants, with lights and an irrigation system.</p>
+        <p>Four frames with long, printed fabrics featuring text and images emerge from this centre. Items like plant materials and juices are exhibited on the flat surfaces of the fabric. Each frame tells the story of a specific resource category:</p>
+        <ul>
+          <li>Dry plant fibres</li>
+          <li>Plant juices</li>
+          <li>Energy production</li>
+          <li>Food and flowers</li>
+        </ul>
+      </div>
+
+      <div class="image-content">
+        <img src="https://files.catbox.moe/w7z5y7.jpg" alt="Exhibition image 2">
+        <img src="https://files.catbox.moe/6scg76.jpg" alt="Exhibition image 6">
+        <div class="side-text"><em>Reharvest</em> is designed as a modular system that can be adapted to different exhibition spaces. The structure can be reconfigured into four (or more) layouts, making it flexible for museums, events, hallways, or entrance halls. It is lightweight, easy to transport, and quick to assemble and disassemble.</div>
+        <div class="image-grid">
+          <img src="https://files.catbox.moe/w6olq3.png" alt="Exhibition detail 3">
+          <img src="https://files.catbox.moe/ur1xbm.png" alt="Exhibition detail 1">
+          <img src="https://files.catbox.moe/jkdugp.png" alt="Exhibition detail 4">
+          <img src="https://files.catbox.moe/mdq8m5.png" alt="Exhibition detail 2">
+        </div>
+        <img src="https://files.catbox.moe/84ucpd.jpg" alt="Exhibition image 8">
+        <img src="https://files.catbox.moe/7h9suk.jpg" alt="Exhibition image 9">
+        <img src="https://files.catbox.moe/g5dfrk.jpg" alt="Exhibition image 3">
+        <img src="https://files.catbox.moe/w130sf.jpg" alt="Exhibition image 7">
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener('mousemove', (e) => {
+        document.documentElement.style.setProperty('--mouse-x', e.clientX + 'px');
+        document.documentElement.style.setProperty('--mouse-y', e.clientY + 'px');
+
+        // Check if hovering over clickable element
+        const target = e.target;
+        const isClickable = target.tagName === 'A' ||
+                           target.tagName === 'BUTTON' ||
+                           target.tagName === 'IMG' ||
+                           target.classList.contains('dropdown-toggle') ||
+                           target.closest('.dropdown-toggle') ||
+                           target.closest('a');
+
+        if (isClickable) {
+          document.body.classList.add('hovering');
+        } else {
+          document.body.classList.remove('hovering');
+        }
+      });
+
+      // Dropdown functionality
+      const dropdown = document.querySelector('.dropdown');
+      const dropdownToggle = document.querySelector('.dropdown-toggle');
+
+      dropdownToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        dropdown.classList.toggle('active');
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!dropdown.contains(e.target)) {
+          dropdown.classList.remove('active');
+        }
+      });
+
+      // Fullscreen image functionality
+      const fullscreenOverlay = document.getElementById('fullscreenOverlay');
+      const fullscreenImg = fullscreenOverlay.querySelector('img');
+      const exhibitionImages = document.querySelectorAll('.image-content img');
+
+      exhibitionImages.forEach(img => {
+        img.addEventListener('click', () => {
+          if (window.innerWidth > 768) {
+            fullscreenImg.src = img.src;
+            fullscreenImg.alt = img.alt;
+            fullscreenOverlay.classList.add('active');
+          }
+        });
+      });
+
+      fullscreenOverlay.addEventListener('click', () => {
+        fullscreenOverlay.classList.remove('active');
+      });
+    </script>
+  </body>
+</html>

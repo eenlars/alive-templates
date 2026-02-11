@@ -1,0 +1,10 @@
+node_modules/
+.bun/
+.npm/
+dist/
+data.db
+bun.lock
+.env
+.env.local
+.env.production
+!.env.example
