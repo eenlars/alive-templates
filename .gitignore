@@ -11,3 +11,5 @@ bun.lock
 *-alive-best
 *-goalive-nl
 *-sonno-tech
+ecosystem.config.js
+SYSTEMD_DEPLOYMENT.md
