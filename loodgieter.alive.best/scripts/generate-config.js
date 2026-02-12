@@ -43,12 +43,12 @@ export default defineConfig(({ mode }) => ({
 	server: {
 		host: "::",
 		port: ${port},
-		allowedHosts: ["${domain}"],
+		allowedHosts: true,
 	},
 	preview: {
 		host: "::",
 		port: ${port},
-		allowedHosts: ["${domain}"],
+		allowedHosts: true,
 	},
 	plugins: [react(), mode === "development" && aliveTagger()].filter(
 		Boolean,
@@ -73,7 +73,7 @@ export default defineConfig(({ mode }) => ({
 		host: "0.0.0.0",
 		port: ${port},
 		strictPort: true,
-		allowedHosts: ["${domain}"],
+		allowedHosts: true,
 		hmr: {
 			protocol: "wss",
 			host: "${domain}",
@@ -89,7 +89,7 @@ export default defineConfig(({ mode }) => ({
 	preview: {
 		host: "0.0.0.0",
 		port: ${port},
-		allowedHosts: ["${domain}"],
+		allowedHosts: true,
 	},
 	plugins: [react(), mode === "development" && aliveTagger()].filter(
 		Boolean,

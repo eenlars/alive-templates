@@ -43,12 +43,12 @@ export default defineConfig(({ mode }) => ({
 	server: {
 		host: "::",
 		port: ${port},
-		allowedHosts: ["${domain}"],
+		allowedHosts: true,
 	},
 	preview: {
 		host: "::",
 		port: ${port},
-		allowedHosts: ["${domain}"],
+		allowedHosts: true,
 	},
 	plugins: [react(), mode === "development" && aliveTagger()].filter(
 		Boolean,
