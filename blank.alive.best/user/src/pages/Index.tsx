@@ -1,6 +1,7 @@
 const Index = () => {
   const currentDomain = window.location.hostname
-  const terminalUrl = `https://terminal.goalive.nl?domain=${currentDomain}`
+  const baseDomain = currentDomain.split('.').slice(-2).join('.')
+  const terminalUrl = `https://${baseDomain}/chat?wk=${currentDomain}`
 
   return (
     <div className="min-h-screen bg-white">
