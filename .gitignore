@@ -11,5 +11,14 @@ bun.lock
 *-alive-best
 *-goalive-nl
 *-sonno-tech
+
+# Legacy / generated at deploy time
 ecosystem.config.js
 SYSTEMD_DEPLOYMENT.md
+Caddyfile
+.site-metadata.json
+vite.config.docker.ts
+template
+.schema-version
+bridge-verify.txt
+.npmrc
