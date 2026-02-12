@@ -43,12 +43,12 @@ export default defineConfig(({ mode }) => ({
 	server: {
 		host: "::",
 		port: ${port},
-		allowedHosts: true,
+		allowedHosts: ["localhost", ".alive.best", ".sonno.tech", ".goalive.nl"],
 	},
 	preview: {
 		host: "::",
 		port: ${port},
-		allowedHosts: true,
+		allowedHosts: ["localhost", ".alive.best", ".sonno.tech", ".goalive.nl"],
 	},
 	plugins: [react(), mode === "development" && aliveTagger()].filter(
 		Boolean,
@@ -73,7 +73,7 @@ export default defineConfig(({ mode }) => ({
 		host: "0.0.0.0",
 		port: ${port},
 		strictPort: true,
-		allowedHosts: true,
+		allowedHosts: ["localhost", ".alive.best", ".sonno.tech", ".goalive.nl"],
 		hmr: {
 			protocol: "wss",
 			host: "${domain}",
@@ -89,7 +89,7 @@ export default defineConfig(({ mode }) => ({
 	preview: {
 		host: "0.0.0.0",
 		port: ${port},
-		allowedHosts: true,
+		allowedHosts: ["localhost", ".alive.best", ".sonno.tech", ".goalive.nl"],
 	},
 	plugins: [react(), mode === "development" && aliveTagger()].filter(
 		Boolean,

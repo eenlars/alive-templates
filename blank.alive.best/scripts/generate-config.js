@@ -47,7 +47,7 @@ export default defineConfig(({ mode }) => ({
 	server: {
 		host: "::",
 		port: PORT,
-		allowedHosts: true,
+		allowedHosts: ["localhost", ".alive.best", ".sonno.tech", ".goalive.nl"],
 		hmr: {
 			// For reverse proxy (Caddy) with HTTPS
 			protocol: "wss",
@@ -63,7 +63,7 @@ export default defineConfig(({ mode }) => ({
 	preview: {
 		host: "::",
 		port: PORT,
-		allowedHosts: true,
+		allowedHosts: ["localhost", ".alive.best", ".sonno.tech", ".goalive.nl"],
 	},
 	plugins: [
 		react(),
@@ -93,7 +93,7 @@ export default defineConfig(({ mode }) => ({
 		host: "0.0.0.0",
 		port: PORT,
 		strictPort: true,
-		allowedHosts: true,
+		allowedHosts: ["localhost", ".alive.best", ".sonno.tech", ".goalive.nl"],
 		hmr: {
 			protocol: "wss",
 			host: "${domain}",
@@ -115,7 +115,7 @@ export default defineConfig(({ mode }) => ({
 	preview: {
 		host: "0.0.0.0",
 		port: PORT,
-		allowedHosts: true,
+		allowedHosts: ["localhost", ".alive.best", ".sonno.tech", ".goalive.nl"],
 	},
 	plugins: [
 		react(),

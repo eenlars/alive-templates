@@ -43,12 +43,12 @@ export default defineConfig(({ mode }) => ({
 	server: {
 		host: "::",
 		port: ${port},
-		allowedHosts: true,
+		allowedHosts: ["localhost", ".alive.best", ".sonno.tech", ".goalive.nl"],
 	},
 	preview: {
 		host: "::",
 		port: ${port},
-		allowedHosts: true,
+		allowedHosts: ["localhost", ".alive.best", ".sonno.tech", ".goalive.nl"],
 	},
 	plugins: [react(), mode === "development" && aliveTagger()].filter(
 		Boolean,
