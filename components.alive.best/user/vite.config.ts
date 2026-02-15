@@ -3,21 +3,31 @@ import react from "@vitejs/plugin-react-swc";
 import { aliveTagger } from "@alive-game/alive-tagger";
 import { defineConfig } from "vite";
 
+// In dev: Vite is the main server on PORT, API runs on internal port (PORT+1000)
+const PORT = Number(process.env.PORT) || 3364;
+const API_PORT = PORT + 1000;
+
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
 	server: {
 		host: "::",
-		port: 3364,
+		port: PORT,
 		allowedHosts: ["components.alive.best"],
-	hmr: {
+		hmr: {
 			// For reverse proxy (Caddy) with HTTPS
 			protocol: "wss",
 			clientPort: 443,
 		},
+		proxy: {
+			"/api": {
+				target: `http://localhost:${API_PORT}`,
+				changeOrigin: true,
+			},
+		},
 	},
 	preview: {
 		host: "::",
-		port: 3364,
+		port: PORT,
 		allowedHosts: ["components.alive.best"],
 	},
 	plugins: [react(), mode === "development" && aliveTagger()].filter(

@@ -1,5 +1,5 @@
 {
-  "name": "@alive-brug/template",
+  "name": "@webalive/template",
   "version": "0.0.0",
   "private": true,
   "description": "Template for creating new Vite React applications with shadcn/ui",
@@ -12,5 +12,9 @@
     "build:dev": "cd user && bun run build:dev",
     "lint": "cd user && bun run lint",
     "preview": "cd user && bun run preview"
+  },
+  "devDependencies": {
+    "@alive-game/alive-tagger": "0.1.4",
+    "tldts": "^7.0.22"
   }
 }

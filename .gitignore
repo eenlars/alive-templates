@@ -20,3 +20,4 @@ template
 .schema-version
 bridge-verify.txt
 .npmrc
+.config/
